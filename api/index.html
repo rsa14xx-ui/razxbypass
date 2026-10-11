@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <title>RANZXBYPASS — Safelinku to MediaFire</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #101d2e;
+      --border: #22344a;
+      --mint: #5fffc1;
+      --text: #eef7ff;
+      --muted: #93a6bb;
+      --danger: #ff7777;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at top, #102b37 0%, transparent 48%),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, Arial, sans-serif;
+      padding: 22px 14px 36px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px 0 25px;
+    }
+
+    .logo {
+      display: inline-block;
+      color: var(--mint);
+      border: 1px solid #2d7e69;
+      background: #0b2829;
+      padding: 8px 13px;
+      border-radius: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      font-size: 13px;
+    }
+
+    h1 {
+      font-size: clamp(27px, 7vw, 38px);
+      margin: 17px 0 8px;
+      line-height: 1.2;
+    }
+
+    h1 span { color: var(--mint); }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      margin: 0 auto;
+      max-width: 420px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 16px;
+      color: var(--mint);
+      background: #102b2b;
+      border: 1px solid #245747;
+      border-radius: 99px;
+      padding: 7px 11px;
+      font-size: 11px;
+    }
+
+    .dot {
+      width: 7px;
+      height: 7px;
+      background: var(--mint);
+      border-radius: 50%;
+    }
+
+    .panel {
+      background: rgba(16, 29, 46, .96);
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      padding: 19px;
+      margin-bottom: 15px;
+      box-shadow: 0 15px 40px #00000018;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 800;
+      margin: 0 0 7px;
+    }
+
+    .description {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+      margin: 0 0 17px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 9px;
+    }
+
+    input {
+      width: 100%;
+      min-width: 0;
+      background: #091522;
+      color: var(--text);
+      border: 1px solid #2b4056;
+      outline: none;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    input:focus {
+      border-color: var(--mint);
+      box-shadow: 0 0 0 3px #5fffc119;
+    }
+
+    input::placeholder { color: #64788e; }
+
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 12px;
+      background: var(--mint);
+      color: #06171a;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .secondary {
+      background: #1b2b3e;
+      color: var(--text);
+      border: 1px solid #30445a;
+    }
+
+    .result {
+      display: none;
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 11px;
+      background: #091522;
+      border: 1px solid var(--border);
+      overflow-wrap: anywhere;
+    }
+
+    .result.show { display: block; }
+
+    .result.success { border-color: #2c8065; }
+    .result.error { border-color: #854444; }
+
+    .result-heading {
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .result-url {
+      color: var(--mint);
+      font-size: 13px;
+      line-height: 1.7;
+      overflow-wrap: anywhere;
+    }
+
+    .result button { margin-top: 12px; }
+
+    .steps {
+      display: grid;
+      gap: 13px;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .number {
+      display: grid;
+      place-items: center;
+      min-width: 27px;
+      height: 27px;
+      border-radius: 8px;
+      color: var(--mint);
+      background: #18352f;
+      font-weight: 900;
+    }
+
+    .step strong { display: block; }
+    .step span { color: var(--muted); }
+
+    footer {
+      text-align: center;
+      padding: 15px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.9;
+    }
+
+    footer a {
+      color: var(--mint);
+      text-decoration: none;
+    }
+
+    .notice {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-top: 13px;
+    }
+  </style>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <div class="logo">RANZXBYPASS</div>
+      <h1>SAFELINKU <span>TO MEDIAFIRE</span></h1>
+      <p class="subtitle">
+        Pemeriksa tautan Safelinku dan pencari link MediaFire
+        dalam satu platform.
+      </p>
+      <div class="status">
+        <span class="dot"></span>
+        WEB TOOL · BETA
+      </div>
+    </header>
+
+    <section class="panel">
+      <h2 class="panel-title">⚡ Ekstrak tautan</h2>
+      <p class="description">
+        Tempel tautan Safelinku atau SFL.gl. Sistem akan memeriksa
+        apakah tautan MediaFire dapat ditemukan.
+      </p>
+
+      <form id="extractForm">
+        <label for="urlInput">URL SAFELINKU / SFL.GL</label>
+        <input
+          id="urlInput"
+          name="url"
+          type="url"
+          placeholder="https://sfl.gl/..."
+          autocomplete="url"
+          maxlength="4096"
+          required
+        >
+        <button id="submitBtn" type="submit">EKSTRAK LINK ↗</button>
+      </form>
+
+      <div id="result" class="result" role="status" aria-live="polite">
+        <div id="resultHeading" class="result-heading"></div>
+        <div id="resultContent" class="result-url"></div>
+        <button id="copyBtn" class="secondary" type="button" hidden>
+          SALIN LINK
+        </button>
+        <button id="openBtn" type="button" hidden>
+          BUKA MEDIAFIRE ↗
+        </button>
+      </div>
+
+      <p class="notice">
+        Catatan: tautan yang memerlukan CAPTCHA, login, atau JavaScript
+        khusus mungkin tidak dapat diperiksa otomatis.
+      </p>
+    </section>
+
+    <section class="panel">
+      <h2 class="panel-title">📌 Cara penggunaan</h2>
+      <p class="description">Ikuti tiga langkah sederhana berikut.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="number">1</div>
+          <div>
+            <strong>Salin tautan</strong>
+            <span>Salin URL Safelinku atau SFL.gl yang ingin diperiksa.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="number">2</div>
+          <div>
+            <strong>Tempel dan ekstrak</strong>
+            <span>Masukkan URL, lalu tekan tombol Ekstrak Link.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="number">3</div>
+          <div>
+            <strong>Periksa hasilnya</strong>
+            <span>Jika ditemukan, salin atau buka tautan MediaFire.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <strong>RANZXBYPASS</strong><br>
+      Safelinku to MediaFire on One Platform<br>
+      Developer:
+      <a href="https://t.me/ranzz_deflated" target="_blank"
+         rel="noopener noreferrer">@ranzz_deflated</a>
+      <br>© 2026 RANZXBYPASS
+    </footer>
+  </main>
+
+  <script>
+    const form = document.getElementById("extractForm");
+    const input = document.getElementById("urlInput");
+    const submitBtn = document.getElementById("submitBtn");
+    const result = document.getElementById("result");
+    const resultHeading = document.getElementById("resultHeading");
+    const resultContent = document.getElementById("resultContent");
+    const copyBtn = document.getElementById("copyBtn");
+    const openBtn = document.getElementById("openBtn");
+
+    let extractedUrl = "";
+
+    function showResult(type, heading, message) {
+      result.className = "result show " + type;
+      resultHeading.textContent = heading;
+      resultContent.textContent = message;
+      copyBtn.hidden = true;
+      openBtn.hidden = true;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const url = input.value.trim();
+
+      let parsed;
+      try {
+        parsed = new URL(url);
+      } catch {
+        showResult("error", "❌ URL tidak valid", "Periksa kembali URL yang kamu masukkan.");
+        return;
+      }
+
+      if (!["http:", "https:"].includes(parsed.protocol)) {
+        showResult("error", "❌ URL tidak valid", "Gunakan tautan HTTP atau HTTPS.");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "MEMERIKSA LINK...";
+      showResult("", "⏳ Sedang memeriksa", "Menghubungi backend. Mohon tunggu sebentar.");
+
+      try {
+        const response = await fetch("/api/extract", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url })
+        });
+
+        const data = await response.json();
+
+        if (data.success && typeof data.url === "string") {
+          const safeUrl = new URL(data.url);
+
+          if (
+            safeUrl.protocol !== "https:" ||
+            !["mediafire.com", "www.mediafire.com"].includes(safeUrl.hostname)
+          ) {
+            throw new Error("Backend mengembalikan domain yang tidak diizinkan.");
+          }
+
+          extractedUrl = safeUrl.href;
+          showResult("success", "✅ Link MediaFire ditemukan!", extractedUrl);
+          copyBtn.hidden = false;
+          openBtn.hidden = false;
+        } else {
+          showResult(
+            "error",
+            "⚠️ Link belum ditemukan",
+            data.message || "Backend belum dapat menemukan link MediaFire."
+          );
+        }
+      } catch (error) {
+        showResult(
+          "error",
+          "❌ Gagal memeriksa",
+          "Backend belum bisa dihubungi atau terjadi kesalahan. Pastikan website sudah di-deploy di Vercel."
+        );
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "EKSTRAK LINK ↗";
+      }
+    });
+
+    copyBtn.addEventListener("click", async () => {
+      if (!extractedUrl) return;
+
+      try {
+        await navigator.clipboard.writeText(extractedUrl);
+        copyBtn.textContent = "LINK TERSALIN ✓";
+      } catch {
+        const temp = document.createElement("textarea");
+        temp.value = extractedUrl;
+        document.body.appendChild(temp);
+        temp.select();
+        const copied = document.execCommand("copy");
+        temp.remove();
+        copyBtn.textContent = copied ? "LINK TERSALIN ✓" : "GAGAL MENYALIN";
+      }
+
+      setTimeout(() => {
+        copyBtn.textContent = "SALIN LINK";
+      }, 1800);
+    });
+
+    openBtn.addEventListener("click", () => {
+      if (!extractedUrl) return;
+      window.open(extractedUrl, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>
